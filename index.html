@@ -15,29 +15,33 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="column-full purple-bg head">
-    <span class="margin-1-rem">Code Journal</span>
+  <header class="row head-row purple-bg">
+    <div class="purple-bg font-white column-half container">
+      <span class="margin-1-rem">Code Journal</span>
+    </div>
   </header>
   <main class="margin-1-rem">
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="column-full column-half container">
       <div class="row">
         <h1>New Entry</h1>
       </div>
       <div class="row">
-        <div class="img-container">
+        <div class="img-container column-half">
           <img src="images/placeholder-image-square.jpg">
         </div>
-      </div>
-      <form>
-        <h4><label for="Title">Title</label></h4>
-        <input type="text" id="Title" name="Title" class="inputs in-sm">
-        <h4><label for="photo-URL">Photo URL</label></h4>
-        <input type="text" id="photo-URL" name="photo-URL" class="inputs in-sm">
-        <h4><label for="notes">Notes</label></h4>
-        <textarea id="notes" name="notes" class="inputs" rows="10"></textarea>
-      </form>
-      <div class="row save-btn-container">
-        <button class="purple-bg save-btn">SAVE</button>
+        <form class="row column-half">
+          <h4><label for="Title">Title</label></h4>
+          <input type="text" id="Title" name="Title" class="inputs in-sm">
+          <h4><label for="photo-URL">Photo URL</label></h4>
+          <input type="text" id="photo-URL" name="photo-URL" class="inputs in-sm">
+        </form>
+        <form class="column-full">
+          <h4><label for="notes">Notes</label></h4>
+          <textarea id="notes" name="notes" class="inputs" rows="10"></textarea>
+          <div class="row save-btn-container">
+            <button class="purple-bg save-btn">SAVE</button>
+          </div>
+        </form>
       </div>
     </div>
   </main>

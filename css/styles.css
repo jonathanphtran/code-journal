@@ -7,10 +7,12 @@
   background-color: #562b81;
 }
 
-.head {
-  color: white;
-  height: 3rem;
+.head-row {
   justify-content: center;
+}
+
+.font-white {
+  color: white;
 }
 
 span {
@@ -63,9 +65,20 @@ img {
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
+  margin-top: 1rem;
 }
 
 h1,
 h4 {
   color: #292929;
+}
+
+@media screen and (min-width: 768px) {
+  .img-container {
+    justify-content: flex-start;
+  }
+
+  .inputs {
+    width: 100%;
+  }
 }
