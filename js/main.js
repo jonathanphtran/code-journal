@@ -3,11 +3,13 @@
 
 var $img = document.querySelector('img');
 var $form = document.querySelector('form');
-var $photoURL = document.querySelector('#photo-URL');
+var $photoUrlInput = document.querySelector('#photo-URL');
+var $titleInput = document.querySelector('#title');
+var $notesInput = document.querySelector('#notes');
 
 var entryInfo = {};
 
-$photoURL.addEventListener('input', changeImage);
+$photoUrlInput.addEventListener('input', changeImage);
 
 function changeImage() {
   event.preventDefault();
@@ -31,4 +33,12 @@ function addJournalToObj() {
 
   data.nextEntryId++;
 
+  data.entries.push(entryInfo);
+
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $photoUrlInput.value = '';
+  $titleInput.value = '';
+  $notesInput.value = '';
+
+  // console.log(data);
 }
