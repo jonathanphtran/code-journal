@@ -15,9 +15,37 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="row purple-bg">
+    <div class="purple-bg font-white column-half container">
+      <span class="margin-1-rem">Code Journal</span>
+    </div>
   </header>
-  <main>
+  <main class="margin-1-rem">
+    <div data-view="entry-form" class="column-full column-half container">
+      <div class="row">
+        <h1>New Entry</h1>
+      </div>
+        <form class="row column-full">
+          <div class="row margin-one-half">
+            <div class="img-container column-half">
+              <img src="images/placeholder-image-square.jpg">
+            </div>
+            <div class="column-half">
+              <h4><label for="title">Title</label></h4>
+              <input type="text" id="title" name="title" class="inputs in-sm" required="required">
+              <h4><label for="photo-URL">Photo URL</label></h4>
+              <input type="text" id="photo-URL" name="photo-URL" class="inputs in-sm" required="required">
+            </div>
+          </div>
+          <div class="margin-one-half">
+            <h4><label for="notes">Notes</label></h4>
+            <textarea id="notes" name="notes" class="inputs" rows="7" required="required"></textarea>
+            <div class="row save-btn-container">
+              <button class="purple-bg save-btn">SAVE</button>
+            </div>
+          </div>
+        </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
