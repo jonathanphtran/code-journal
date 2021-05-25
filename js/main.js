@@ -9,6 +9,7 @@ var $notesInput = document.querySelector('#notes');
 var $allPages = document.querySelector('.allPages');
 var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
+// var $list = document.querySelector('.list');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -72,3 +73,37 @@ function addJournalToObj() {
   $notesInput.value = '';
 
 }
+
+function generateDomTree(journalEntry) {
+  var newLi = document.createElement('li');
+  newLi.className = 'row margin-top-1-rem';
+
+  var newImgContainer = document.createElement('div');
+  newImgContainer.className = 'img-container entry-info left';
+  var newImage = document.createElement('img');
+
+  var newInfoContainer = document.createElement('div');
+  newInfoContainer.className = 'right';
+  var newTitle = document.createElement('h2');
+  newTitle.className = 'margin-bottom-1-rem';
+  var newDesc = document.createElement('p');
+  newDesc.className = 'margin-bottom-1-rem entry-info';
+
+  var titleText = document.createTextNode(data.entries[journalEntry].notes);
+  newTitle.appendChild(titleText);
+  var descText = document.createTextNode(data.entries[journalEntry].notes);
+  newDesc.appendChild(descText);
+  newInfoContainer.appendChild(newTitle);
+  newInfoContainer.appendChild(newDesc);
+
+  newImage.setAttribute('src', data.entries[journalEntry].image);
+  newImgContainer.appendChild(newImage);
+
+  newLi.appendChild(newImgContainer);
+  newLi.appendChild(newInfoContainer);
+
+  // console.log(newLi);
+  return newLi;
+}
+
+generateDomTree(0);
