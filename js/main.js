@@ -40,5 +40,9 @@ function addJournalToObj() {
   $titleInput.value = '';
   $notesInput.value = '';
 
-  // console.log(data);
 }
+
+window.addEventListener('beforeunload', function (event) {
+  var newData = JSON.stringify(data);
+  localStorage.setItem('data', newData);
+});
