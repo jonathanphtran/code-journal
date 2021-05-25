@@ -11,10 +11,6 @@ body {
   background-color: #562b81;
 }
 
-.head-row {
-  justify-content: center;
-}
-
 .font-white {
   color: white;
 }
@@ -30,8 +26,7 @@ span {
 .img-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  height: 15rem;
+  height: 17rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -81,10 +76,6 @@ h4 {
     justify-content: flex-start;
     margin: 0;
     padding: 0;
-  }
-
-  .inputs {
-    width: 100%;
   }
 
   .margin-one-half {

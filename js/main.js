@@ -12,7 +12,11 @@ $photoUrlInput.addEventListener('input', changeImage);
 function changeImage() {
   event.preventDefault();
   var newImg = $form[1].value;
-  $img.setAttribute('src', newImg);
+  if (newImg === '') {
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else {
+    $img.setAttribute('src', newImg);
+  }
 }
 
 $form.addEventListener('submit', addJournalToObj);
@@ -40,7 +44,6 @@ function addJournalToObj() {
   $titleInput.value = '';
   $notesInput.value = '';
 
-// if the photo url is empty, set it back to the placeholder
 }
 
 window.addEventListener('beforeunload', function (event) {
