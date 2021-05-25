@@ -40,6 +40,7 @@ function addJournalToObj() {
   $titleInput.value = '';
   $notesInput.value = '';
 
+// if the photo url is empty, set it back to the placeholder
 }
 
 window.addEventListener('beforeunload', function (event) {
