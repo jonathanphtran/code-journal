@@ -1,53 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <header class="row purple-bg">
-    <div class="purple-bg font-white column-half container">
-      <span class="margin-1-rem">Code Journal</span>
+    <div class="purple-bg font-white container row row-half allPages">
+      <span class="margin-1-rem column-40 page active" data-view="entry-form">Code Journal</span>
+      <span class="margin-1-rem column-quarter page" data-view="entries">Entries</span>
     </div>
   </header>
   <main class="margin-1-rem">
-    <div data-view="entry-form" class="column-full column-half container">
+    <div data-view="entry-form" class="column-full column-half container view">
       <div class="row">
-        <h1>New Entry</h1>
+        <h1 class="padding-left-0">New Entry</h1>
       </div>
-        <form class="row column-full">
-          <div class="row margin-one-half">
-            <div class="img-container column-half">
-              <img src="images/placeholder-image-square.jpg">
-            </div>
-            <div class="column-half">
-              <h4><label for="title">Title</label></h4>
-              <input type="text" id="title" name="title" class="inputs in-sm" required="required">
-              <h4><label for="photo-URL">Photo URL</label></h4>
-              <input type="text" id="photo-URL" name="photo-URL" class="inputs in-sm" required="required">
-            </div>
+      <form class="row column-full">
+        <div class="row margin-one-half">
+          <div class="img-container column-half">
+            <img src="images/placeholder-image-square.jpg">
           </div>
-          <div class="margin-one-half">
-            <h4><label for="notes">Notes</label></h4>
-            <textarea id="notes" name="notes" class="inputs" rows="7" required="required"></textarea>
-            <div class="row save-btn-container">
-              <button class="purple-bg save-btn">SAVE</button>
-            </div>
+          <div class="column-half">
+            <h4><label for="title">Title</label></h4>
+            <input type="text" id="title" name="title" class="inputs in-sm" required="required">
+            <h4><label for="photo-URL">Photo URL</label></h4>
+            <input type="text" id="photo-URL" name="photo-URL" class="inputs in-sm" required="required">
           </div>
-        </form>
+        </div>
+        <div class="margin-one-half">
+          <h4><label for="notes">Notes</label></h4>
+          <textarea id="notes" name="notes" class="inputs" rows="7" required="required"></textarea>
+          <div class="row btn-container">
+            <button class="purple-bg btn">SAVE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div data-view="entries" class="column-full column-half container hidden view">
+      <div class="row space-between">
+        <h1 class="column-quarter column-half column-center">Entries</h1>
+        <div class="btn-container">
+          <button class="purple-bg btn">NEW</button>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <div class="img-container">
+            <img
+              src="https://pims.purinamills.com/BusinessLink/media/Mazuri/2020_AN_Mazuri_Alpaca-Article_480x480_032020.png?ext=.png">
+          </div>
+          <h2 class="margin-bottom-1-rem">Alpaca</h2>
+          <p class="margin-bottom-1-rem entry-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+            id illum reiciendis illo eum voluptatibus nihil quis unde numquam ut? Eveniet ipsum necessitatibus aut,
+            libero exercitationem laboriosam repellendus quod repudiandae.
+            Quibusdam amet explicabo culpa sit quo nisi illo voluptatum et ad repellendus nostrum perferendis dolores
+            facilis assumenda fuga doloremque aliquam autem, nemo quos? Expedita, vero. Facere quas pariatur quibusdam
+            quia?</p>
+        </li>
+      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

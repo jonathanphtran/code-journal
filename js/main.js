@@ -6,6 +6,33 @@ var $form = document.querySelector('form');
 var $photoUrlInput = document.querySelector('#photo-URL');
 var $titleInput = document.querySelector('#title');
 var $notesInput = document.querySelector('#notes');
+var $allPages = document.querySelector('.allPages');
+var $pages = document.querySelectorAll('.page');
+var $views = document.querySelectorAll('.view');
+
+function checkMatch(event) {
+  var $match = event.target.matches('.page');
+  if (!$match) return;
+
+  for (var i = 0; i < $pages.length; i++) {
+    if ($pages[i] === event.target) {
+      $pages[i].className = 'margin-1-rem column-40 page active';
+    } else {
+      $pages[i].className = 'margin-1-rem column-quarter page';
+    }
+  }
+
+  var $dataView = event.target.getAttribute('data-view');
+  for (var j = 0; j < $views.length; j++) {
+    if ($views[j].getAttribute('data-view') === $dataView) {
+      $views[j].className = 'column-full column-half container view';
+    } else {
+      $views[j].className = 'column-full column-half container hidden view';
+    }
+  }
+}
+
+$allPages.addEventListener('click', checkMatch);
 
 $photoUrlInput.addEventListener('input', changeImage);
 
