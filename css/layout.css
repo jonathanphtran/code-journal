@@ -55,6 +55,19 @@
     padding: 0 0.75rem;
   }
 
+  .left {
+    width: 40%;
+  }
+
+  .right {
+    width: 60%;
+    padding-left: 1rem;
+  }
+
+  .margin-top-1-rem {
+    margin-top: 1rem;
+  }
+
   .column-half {
     width: 50%;
   }

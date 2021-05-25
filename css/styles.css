@@ -117,4 +117,9 @@ h4 {
   .margin-1-rem {
     margin: 1rem;
   }
+
+  .entry-big {
+    margin: 0;
+    padding: 0;
+  }
 }
