@@ -11,7 +11,7 @@ $photoUrlInput.addEventListener('input', changeImage);
 
 function changeImage() {
   event.preventDefault();
-  var newImg = $form[1].value;
+  var newImg = $form.elements['photo-URL'].value;
   if (newImg === '') {
     $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   } else {
@@ -26,9 +26,9 @@ function addJournalToObj() {
 
   var entryInfo = {};
 
-  var newTitle = $form[0].value;
-  var newImg = $form[1].value;
-  var newNotes = $form[2].value;
+  var newTitle = $form.elements.title.value;
+  var newImg = $form.elements['photo-URL'].value;
+  var newNotes = $form.elements.notes.value;
 
   entryInfo.title = newTitle;
   entryInfo.image = newImg;
@@ -45,8 +45,3 @@ function addJournalToObj() {
   $notesInput.value = '';
 
 }
-
-window.addEventListener('beforeunload', function (event) {
-  var newData = JSON.stringify(data);
-  localStorage.setItem('data', newData);
-});
