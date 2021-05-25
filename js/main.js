@@ -7,8 +7,6 @@ var $photoUrlInput = document.querySelector('#photo-URL');
 var $titleInput = document.querySelector('#title');
 var $notesInput = document.querySelector('#notes');
 
-var entryInfo = {};
-
 $photoUrlInput.addEventListener('input', changeImage);
 
 function changeImage() {
@@ -21,6 +19,8 @@ $form.addEventListener('submit', addJournalToObj);
 
 function addJournalToObj() {
   event.preventDefault();
+
+  var entryInfo = {};
 
   var newTitle = $form[0].value;
   var newImg = $form[1].value;
