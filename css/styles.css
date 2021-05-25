@@ -43,6 +43,8 @@ img {
   margin-bottom: 1rem;
   border: 1px solid #b6b6b6;
   border-radius: 0.2rem;
+  padding: 0.5rem;
+  font-weight: 600;
 }
 
 .in-sm {
