@@ -11,10 +11,8 @@ var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
-var currentView = 'null';
 
 function checkMatch(event) {
-  currentView = event.target.getAttribute('data-view');
   var $match = event.target.matches('.page');
   if (!$match) return;
 
@@ -30,6 +28,7 @@ function checkMatch(event) {
   for (var j = 0; j < $views.length; j++) {
     if ($views[j].getAttribute('data-view') === $dataView) {
       $views[j].className = 'column-full column-half container view';
+      data.view = $dataView;
     } else {
       $views[j].className = 'column-full column-half container hidden view';
     }
@@ -38,10 +37,10 @@ function checkMatch(event) {
 $allPages.addEventListener('click', checkMatch);
 
 function goToCreateNew(event) {
-  currentView = event.target.getAttribute('data-view');
   for (var j = 0; j < $views.length; j++) {
     if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
       $views[j].className = 'column-full column-half container view';
+      data.view = event.target.getAttribute('data-view');
     } else {
       $views[j].className = 'column-full column-half container hidden view';
     }
@@ -50,10 +49,10 @@ function goToCreateNew(event) {
 $new.addEventListener('click', goToCreateNew);
 
 function goToEntries(event) {
-  currentView = event.target.getAttribute('data-view');
   for (var j = 0; j < $views.length; j++) {
     if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
       $views[j].className = 'column-full column-half container view';
+      data.view = event.target.getAttribute('data-view');
     } else {
       $views[j].className = 'column-full column-half container hidden view';
     }
@@ -72,10 +71,16 @@ function changeImage() {
 }
 $photoUrlInput.addEventListener('input', changeImage);
 
-window.addEventListener('beforeunload', changeView);
-function changeView() {
-  localStorage.setItem(data.view, currentView);
-}
+var dataObj = {};
+
+window.addEventListener('beforeunload', function () {
+  var localObj = localStorage.getItem('data');
+  if (localObj !== null) {
+    dataObj = JSON.parse(localObj);
+  }
+  var dataObjJSON = JSON.stringify(dataObj);
+  localStorage.setItem('data', dataObjJSON);
+});
 
 $form.addEventListener('submit', addJournalToObj);
 function addJournalToObj() {
@@ -149,7 +154,7 @@ window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  if (localStorage.getItem('entry-form') === 'entries') {
+  if (data.view === 'entries') {
     $views[0].className = 'column-full column-half container hidden view';
     $views[1].className = 'column-full column-half container view';
   } else if (localStorage.getItem('entry-form') === 'entry-form') {
