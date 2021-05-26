@@ -11,8 +11,10 @@ var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
+var currentView = 'null';
 
 function checkMatch(event) {
+  currentView = event.target.getAttribute('data-view');
   var $match = event.target.matches('.page');
   if (!$match) return;
 
@@ -36,6 +38,7 @@ function checkMatch(event) {
 $allPages.addEventListener('click', checkMatch);
 
 function goToCreateNew(event) {
+  currentView = event.target.getAttribute('data-view');
   for (var j = 0; j < $views.length; j++) {
     if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
       $views[j].className = 'column-full column-half container view';
@@ -47,6 +50,7 @@ function goToCreateNew(event) {
 $new.addEventListener('click', goToCreateNew);
 
 function goToEntries(event) {
+  currentView = event.target.getAttribute('data-view');
   for (var j = 0; j < $views.length; j++) {
     if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
       $views[j].className = 'column-full column-half container view';
@@ -68,8 +72,12 @@ function changeImage() {
 }
 $photoUrlInput.addEventListener('input', changeImage);
 
-$form.addEventListener('submit', addJournalToObj);
+window.addEventListener('beforeunload', changeView);
+function changeView() {
+  localStorage.setItem(data.view, currentView);
+}
 
+$form.addEventListener('submit', addJournalToObj);
 function addJournalToObj() {
   event.preventDefault();
 
@@ -92,7 +100,6 @@ function addJournalToObj() {
   $photoUrlInput.value = '';
   $titleInput.value = '';
   $notesInput.value = '';
-
 }
 
 function generateDomTree(journalEntry) {
@@ -141,34 +148,12 @@ function addNewEntry(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
 
-// var pageView = {
-//   pageClasses: []
-// };
-
-// function addToSession(event) {
-//   event.preventDefault();
-
-//   var firstPage = $views[0].className;
-//   var secondPage = $views[1].className;
-
-//   pageView.pageClasses.push(firstPage);
-//   pageView.pageClasses.push(secondPage);
-// }
-
-// var sessionData = sessionStorage.getItem('pageView');
-
-// if (sessionData !== null) {
-//   sessionData = JSON.parse(sessionData);
-//   pageView = sessionData;
-// }
-
-// window.addEventListener('beforeunload', function (event) {
-//   var newSessionData = JSON.stringify(pageView);
-//   sessionStorage.setItem('pageView', newSessionData);
-// });
-// window.addEventListener('beforeunload', addToSession);
-
-// document.addEventListener('DOMContentLoaded', function (event) {
-//   $views[1].className = sessionData.pageClasses[0];
-//   $views[0].className = sessionData.pageClasses[1];
-// });
+document.addEventListener('DOMContentLoaded', function (event) {
+  if (localStorage.getItem('entry-form') === 'entries') {
+    $views[0].className = 'column-full column-half container hidden view';
+    $views[1].className = 'column-full column-half container view';
+  } else if (localStorage.getItem('entry-form') === 'entry-form') {
+    $views[1].className = 'column-full column-half container hidden view';
+    $views[0].className = 'column-full column-half container view';
+  }
+});
