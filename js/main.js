@@ -9,7 +9,7 @@ var $notesInput = document.querySelector('#notes');
 var $allPages = document.querySelector('.allPages');
 var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
-// var $list = document.querySelector('.list');
+var $list = document.querySelector('.list');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -76,7 +76,7 @@ function addJournalToObj() {
 
 function generateDomTree(journalEntry) {
   var newLi = document.createElement('li');
-  newLi.className = 'row margin-top-1-rem';
+  newLi.className = 'row margin-top1-bottom2';
 
   var newImgContainer = document.createElement('div');
   newImgContainer.className = 'img-container entry-info left';
@@ -106,4 +106,11 @@ function generateDomTree(journalEntry) {
   return newLi;
 }
 
-generateDomTree(0);
+function appendDOM(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var newDOM = generateDomTree(i);
+    $list.appendChild(newDOM);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', appendDOM);

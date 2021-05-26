@@ -61,11 +61,12 @@
 
   .right {
     width: 60%;
-    padding-left: 1rem;
+    padding-left: 2rem;
   }
 
-  .margin-top-1-rem {
+  .margin-top1-bottom2 {
     margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 
   .column-half {
