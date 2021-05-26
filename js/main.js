@@ -113,7 +113,6 @@ function generateDomTree(journalEntry) {
   newLi.appendChild(newImgContainer);
   newLi.appendChild(newInfoContainer);
 
-  // console.log(newLi);
   return newLi;
 }
 
@@ -131,3 +130,35 @@ function addNewEntry(event) {
 
 window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
+
+var pageView = {
+  pageClasses: []
+};
+
+function addToSession(event) {
+  event.preventDefault();
+
+  var firstPage = $views[0].className;
+  var secondPage = $views[1].className;
+
+  pageView.pageClasses.push(firstPage);
+  pageView.pageClasses.push(secondPage);
+}
+
+var sessionData = sessionStorage.getItem('pageView');
+
+if (sessionData !== null) {
+  sessionData = JSON.parse(sessionData);
+  pageView = sessionData;
+}
+
+window.addEventListener('beforeunload', function (event) {
+  var newSessionData = JSON.stringify(pageView);
+  sessionStorage.setItem('pageView', newSessionData);
+});
+window.addEventListener('beforeunload', addToSession);
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  $views[1].className = sessionData.pageClasses[0];
+  $views[0].className = sessionData.pageClasses[1];
+});
