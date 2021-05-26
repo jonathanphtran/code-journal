@@ -36,14 +36,24 @@ function checkMatch(event) {
 $allPages.addEventListener('click', checkMatch);
 
 function goToCreateNew(event) {
-  $views[0].className = 'column-full column-half container view';
-  $views[1].className = 'column-full column-half container hidden view';
+  for (var j = 0; j < $views.length; j++) {
+    if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
+      $views[j].className = 'column-full column-half container view';
+    } else {
+      $views[j].className = 'column-full column-half container hidden view';
+    }
+  }
 }
 $new.addEventListener('click', goToCreateNew);
 
 function goToEntries(event) {
-  $views[1].className = 'column-full column-half container view';
-  $views[0].className = 'column-full column-half container hidden view';
+  for (var j = 0; j < $views.length; j++) {
+    if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
+      $views[j].className = 'column-full column-half container view';
+    } else {
+      $views[j].className = 'column-full column-half container hidden view';
+    }
+  }
 }
 $form.addEventListener('submit', goToEntries);
 
@@ -131,34 +141,34 @@ function addNewEntry(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
 
-var pageView = {
-  pageClasses: []
-};
+// var pageView = {
+//   pageClasses: []
+// };
 
-function addToSession(event) {
-  event.preventDefault();
+// function addToSession(event) {
+//   event.preventDefault();
 
-  var firstPage = $views[0].className;
-  var secondPage = $views[1].className;
+//   var firstPage = $views[0].className;
+//   var secondPage = $views[1].className;
 
-  pageView.pageClasses.push(firstPage);
-  pageView.pageClasses.push(secondPage);
-}
+//   pageView.pageClasses.push(firstPage);
+//   pageView.pageClasses.push(secondPage);
+// }
 
-var sessionData = sessionStorage.getItem('pageView');
+// var sessionData = sessionStorage.getItem('pageView');
 
-if (sessionData !== null) {
-  sessionData = JSON.parse(sessionData);
-  pageView = sessionData;
-}
+// if (sessionData !== null) {
+//   sessionData = JSON.parse(sessionData);
+//   pageView = sessionData;
+// }
 
-window.addEventListener('beforeunload', function (event) {
-  var newSessionData = JSON.stringify(pageView);
-  sessionStorage.setItem('pageView', newSessionData);
-});
-window.addEventListener('beforeunload', addToSession);
+// window.addEventListener('beforeunload', function (event) {
+//   var newSessionData = JSON.stringify(pageView);
+//   sessionStorage.setItem('pageView', newSessionData);
+// });
+// window.addEventListener('beforeunload', addToSession);
 
-document.addEventListener('DOMContentLoaded', function (event) {
-  $views[1].className = sessionData.pageClasses[0];
-  $views[0].className = sessionData.pageClasses[1];
-});
+// document.addEventListener('DOMContentLoaded', function (event) {
+//   $views[1].className = sessionData.pageClasses[0];
+//   $views[0].className = sessionData.pageClasses[1];
+// });
