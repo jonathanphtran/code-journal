@@ -11,6 +11,7 @@ var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
+var $noEntries = document.querySelector('.no-entries');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -148,17 +149,30 @@ function appendDOM(event) {
 function addNewEntry(event) {
   var newDom = generateDomTree(0);
   $list.prepend(newDom);
+  $noEntries.className = 'no-entries hidden';
 }
 
 window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  if (data.view === 'entries') {
-    $views[0].className = 'column-full column-half container hidden view';
-    $views[1].className = 'column-full column-half container view';
-  } else if (localStorage.getItem('entry-form') === 'entry-form') {
-    $views[1].className = 'column-full column-half container hidden view';
-    $views[0].className = 'column-full column-half container view';
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === data.view) {
+      $views[i].className = 'column-full column-half container view';
+    } else {
+      $views[i].className = 'column-full column-half container view hidden';
+    }
   }
 });
+
+var localData = localStorage.getItem('data');
+if (localData !== null) {
+  localData = JSON.parse(localData);
+  var checkData = localData;
+}
+
+if (checkData.entries.length === 0) {
+  $noEntries.className = 'no-entries';
+} else if (checkData.entries.length > 0) {
+  $noEntries.className = 'no-entries hidden';
+}
