@@ -41,17 +41,12 @@ function checkMatch(event) {
 }
 $allPages.addEventListener('click', checkMatch);
 
-function goToCreateNew(event) {
+function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
 }
-$new.addEventListener('click', goToCreateNew);
-
-function goToEntries(event) {
-  var $dataView = event.target.getAttribute('data-view');
-  switchView($dataView);
-}
-$form.addEventListener('submit', goToEntries);
+$form.addEventListener('submit', navigateToView);
+$new.addEventListener('click', navigateToView);
 
 function changeImage() {
   event.preventDefault();
@@ -138,13 +133,7 @@ function addNewEntry(event) {
 $form.addEventListener('submit', addNewEntry);
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  for (var i = 0; i < $views.length; i++) {
-    if ($views[i].getAttribute('data-view') === data.view) {
-      $views[i].className = 'column-full column-half container view';
-    } else {
-      $views[i].className = 'column-full column-half container view hidden';
-    }
-  }
+  switchView(data.view);
 });
 
 if (data.entries.length === 0) {
