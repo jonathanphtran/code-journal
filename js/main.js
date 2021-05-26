@@ -11,7 +11,6 @@ var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
-var $save = document.querySelector('.save');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -46,7 +45,7 @@ function goToEntries(event) {
   $views[1].className = 'column-full column-half container view';
   $views[0].className = 'column-full column-half container hidden view';
 }
-$save.addEventListener('submit', goToEntries);
+$form.addEventListener('submit', goToEntries);
 
 function changeImage() {
   event.preventDefault();
@@ -77,7 +76,7 @@ function addJournalToObj() {
 
   data.nextEntryId++;
 
-  data.entries.push(entryInfo);
+  data.entries.unshift(entryInfo);
 
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $photoUrlInput.value = '';
@@ -119,12 +118,16 @@ function generateDomTree(journalEntry) {
 }
 
 function appendDOM(event) {
-  $list.innerHTML = '';
   for (var i = 0; i < data.entries.length; i++) {
     var newDOM = generateDomTree(i);
     $list.appendChild(newDOM);
   }
 }
 
+function addNewEntry(event) {
+  var newDom = generateDomTree(0);
+  $list.prepend(newDom);
+}
+
 window.addEventListener('DOMContentLoaded', appendDOM);
-// $save.addEventListener('submit', appendDOM);
+$form.addEventListener('submit', addNewEntry);
