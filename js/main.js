@@ -10,6 +10,7 @@ var $allPages = document.querySelector('.allPages');
 var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
+var $new = document.querySelector('.new');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -34,6 +35,13 @@ function checkMatch(event) {
 }
 
 $allPages.addEventListener('click', checkMatch);
+
+function goToCreateNew(event) {
+  $views[0].className = 'column-full column-half container view';
+  $views[1].className = 'column-full column-half container hidden view';
+}
+
+$new.addEventListener('click', goToCreateNew);
 
 $photoUrlInput.addEventListener('input', changeImage);
 
@@ -89,7 +97,7 @@ function generateDomTree(journalEntry) {
   var newDesc = document.createElement('p');
   newDesc.className = 'margin-bottom-1-rem entry-info';
 
-  var titleText = document.createTextNode(data.entries[journalEntry].notes);
+  var titleText = document.createTextNode(data.entries[journalEntry].title);
   newTitle.appendChild(titleText);
   var descText = document.createTextNode(data.entries[journalEntry].notes);
   newDesc.appendChild(descText);
