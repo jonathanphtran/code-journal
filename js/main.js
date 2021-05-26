@@ -13,6 +13,17 @@ var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
 
+function switchView(nameOfView) {
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === nameOfView) {
+      $views[i].className = 'column-full column-half container view';
+      data.view = nameOfView;
+    } else {
+      $views[i].className = 'column-full column-half container hidden view';
+    }
+  }
+}
+
 function checkMatch(event) {
   var $match = event.target.matches('.page');
   if (!$match) return;
@@ -26,38 +37,19 @@ function checkMatch(event) {
   }
 
   var $dataView = event.target.getAttribute('data-view');
-  for (var j = 0; j < $views.length; j++) {
-    if ($views[j].getAttribute('data-view') === $dataView) {
-      $views[j].className = 'column-full column-half container view';
-      data.view = $dataView;
-    } else {
-      $views[j].className = 'column-full column-half container hidden view';
-    }
-  }
+  switchView($dataView);
 }
 $allPages.addEventListener('click', checkMatch);
 
 function goToCreateNew(event) {
-  for (var j = 0; j < $views.length; j++) {
-    if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
-      $views[j].className = 'column-full column-half container view';
-      data.view = event.target.getAttribute('data-view');
-    } else {
-      $views[j].className = 'column-full column-half container hidden view';
-    }
-  }
+  var $dataView = event.target.getAttribute('data-view');
+  switchView($dataView);
 }
 $new.addEventListener('click', goToCreateNew);
 
 function goToEntries(event) {
-  for (var j = 0; j < $views.length; j++) {
-    if ($views[j].getAttribute('data-view') === event.target.getAttribute('data-view')) {
-      $views[j].className = 'column-full column-half container view';
-      data.view = event.target.getAttribute('data-view');
-    } else {
-      $views[j].className = 'column-full column-half container hidden view';
-    }
-  }
+  var $dataView = event.target.getAttribute('data-view');
+  switchView($dataView);
 }
 $form.addEventListener('submit', goToEntries);
 
@@ -71,17 +63,6 @@ function changeImage() {
   }
 }
 $photoUrlInput.addEventListener('input', changeImage);
-
-var dataObj = {};
-
-window.addEventListener('beforeunload', function () {
-  var localObj = localStorage.getItem('data');
-  if (localObj !== null) {
-    dataObj = JSON.parse(localObj);
-  }
-  var dataObjJSON = JSON.stringify(dataObj);
-  localStorage.setItem('data', dataObjJSON);
-});
 
 $form.addEventListener('submit', addJournalToObj);
 function addJournalToObj() {
@@ -123,14 +104,14 @@ function generateDomTree(journalEntry) {
   var newDesc = document.createElement('p');
   newDesc.className = 'margin-bottom-1-rem entry-info';
 
-  var titleText = document.createTextNode(data.entries[journalEntry].title);
+  var titleText = document.createTextNode(journalEntry.title);
   newTitle.appendChild(titleText);
-  var descText = document.createTextNode(data.entries[journalEntry].notes);
+  var descText = document.createTextNode(journalEntry.notes);
   newDesc.appendChild(descText);
   newInfoContainer.appendChild(newTitle);
   newInfoContainer.appendChild(newDesc);
 
-  newImage.setAttribute('src', data.entries[journalEntry].image);
+  newImage.setAttribute('src', journalEntry.image);
   newImgContainer.appendChild(newImage);
 
   newLi.appendChild(newImgContainer);
@@ -141,18 +122,19 @@ function generateDomTree(journalEntry) {
 
 function appendDOM(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    var newDOM = generateDomTree(i);
+    var newDOM = generateDomTree(data.entries[i]);
     $list.appendChild(newDOM);
   }
 }
 
+window.addEventListener('DOMContentLoaded', appendDOM);
+
 function addNewEntry(event) {
-  var newDom = generateDomTree(0);
+  var newDom = generateDomTree(data.entries[0]);
   $list.prepend(newDom);
   $noEntries.className = 'no-entries hidden';
 }
 
-window.addEventListener('DOMContentLoaded', appendDOM);
 $form.addEventListener('submit', addNewEntry);
 
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -165,14 +147,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 
-var localData = localStorage.getItem('data');
-if (localData !== null) {
-  localData = JSON.parse(localData);
-  var checkData = localData;
-}
-
-if (checkData.entries.length === 0) {
+if (data.entries.length === 0) {
   $noEntries.className = 'no-entries';
-} else if (checkData.entries.length > 0) {
+} else if (data.entries.length > 0) {
   $noEntries.className = 'no-entries hidden';
 }
