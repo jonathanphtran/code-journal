@@ -18,9 +18,9 @@ function checkMatch(event) {
 
   for (var i = 0; i < $pages.length; i++) {
     if ($pages[i] === event.target) {
-      $pages[i].className = 'margin-1-rem column-40 page active';
+      $pages[i].className = 'margin-1-rem column-30 page active';
     } else {
-      $pages[i].className = 'margin-1-rem column-quarter page';
+      $pages[i].className = 'margin-1-rem column-30 page';
     }
   }
 
