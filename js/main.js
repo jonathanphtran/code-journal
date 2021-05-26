@@ -79,7 +79,7 @@ function generateDomTree(journalEntry) {
   newLi.className = 'row margin-top1-bottom2';
 
   var newImgContainer = document.createElement('div');
-  newImgContainer.className = 'img-container entry-info left';
+  newImgContainer.className = 'img-container entry-info left width-100';
   var newImage = document.createElement('img');
 
   var newInfoContainer = document.createElement('div');

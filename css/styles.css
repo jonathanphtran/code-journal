@@ -12,6 +12,12 @@ ul {
   padding: 0;
 }
 
+li {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .purple-bg {
   background-color: #562b81;
 }
@@ -47,6 +53,11 @@ img {
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
+  display: block;
+}
+
+.width-100 {
+  width: 100%;
 }
 
 .inputs {
@@ -103,12 +114,6 @@ h4 {
   padding: 0;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 @media screen and (min-width: 768px) {
   .img-container {
     justify-content: flex-start;
@@ -127,5 +132,9 @@ h4 {
   .entry-big {
     margin: 0;
     padding: 0;
+  }
+
+  .center {
+    display: flex;
   }
 }
