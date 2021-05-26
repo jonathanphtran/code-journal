@@ -3,8 +3,17 @@
   margin: 0;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: #f0f0f0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .purple-bg {
@@ -15,12 +24,8 @@ body {
   color: white;
 }
 
-span {
-  font-size: 1.3rem;
-}
-
 .margin-1-rem {
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 .img-container {
@@ -35,6 +40,10 @@ img {
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
+}
+
+.width-100 {
+  width: 100%;
 }
 
 .inputs {
@@ -55,22 +64,40 @@ img {
   outline-color: #562b81;
 }
 
-.save-btn-container {
+.btn-container {
   justify-content: flex-end;
 }
 
-.save-btn {
-  flex-direction: row-reverse;
+.btn {
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
-  margin-top: 1rem;
+}
+
+.margin-bottom-1-rem {
+  margin-bottom: 1rem;
+}
+
+.entry-info {
+  line-height: 1.5rem;
 }
 
 h1,
 h4 {
   color: #292929;
+}
+
+.new {
+  text-decoration: none;
+  position: relative;
+  top: 0.5rem;
+}
+
+.no-entries {
+  text-align: center;
+  position: relative;
+  top: 3rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -82,5 +109,22 @@ h4 {
 
   .margin-one-half {
     margin-top: 1.5rem;
+  }
+
+  .margin-1-rem {
+    margin: 1rem;
+  }
+
+  .entry-big {
+    margin: 0;
+    padding: 0;
+  }
+
+  .center {
+    display: flex;
+  }
+
+  .width-100 {
+    width: 40%;
   }
 }

@@ -1,4 +1,5 @@
 /* exported data */
+/* exported pageView */
 
 var data = {
   view: 'entry-form',
