@@ -11,6 +11,7 @@ var $pages = document.querySelectorAll('.page');
 var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
+var $save = document.querySelector('.save');
 
 function checkMatch(event) {
   var $match = event.target.matches('.page');
@@ -33,17 +34,19 @@ function checkMatch(event) {
     }
   }
 }
-
 $allPages.addEventListener('click', checkMatch);
 
 function goToCreateNew(event) {
   $views[0].className = 'column-full column-half container view';
   $views[1].className = 'column-full column-half container hidden view';
 }
-
 $new.addEventListener('click', goToCreateNew);
 
-$photoUrlInput.addEventListener('input', changeImage);
+function goToEntries(event) {
+  $views[1].className = 'column-full column-half container view';
+  $views[0].className = 'column-full column-half container hidden view';
+}
+$save.addEventListener('submit', goToEntries);
 
 function changeImage() {
   event.preventDefault();
@@ -54,6 +57,7 @@ function changeImage() {
     $img.setAttribute('src', newImg);
   }
 }
+$photoUrlInput.addEventListener('input', changeImage);
 
 $form.addEventListener('submit', addJournalToObj);
 
@@ -115,6 +119,7 @@ function generateDomTree(journalEntry) {
 }
 
 function appendDOM(event) {
+  $list.innerHTML = '';
   for (var i = 0; i < data.entries.length; i++) {
     var newDOM = generateDomTree(i);
     $list.appendChild(newDOM);
@@ -122,3 +127,4 @@ function appendDOM(event) {
 }
 
 window.addEventListener('DOMContentLoaded', appendDOM);
+// $save.addEventListener('submit', appendDOM);
