@@ -13,6 +13,14 @@ var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
 
+function submitNewEntry(event) {
+  navigateToView(event);
+  addJournalToObj();
+  addNewEntry(event);
+}
+
+$form.addEventListener('submit', submitNewEntry);
+
 function switchView(nameOfView) {
   for (var i = 0; i < $views.length; i++) {
     if ($views[i].getAttribute('data-view') === nameOfView) {
@@ -45,7 +53,6 @@ function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
 }
-$form.addEventListener('submit', navigateToView);
 $new.addEventListener('click', navigateToView);
 
 function changeImage() {
@@ -59,7 +66,6 @@ function changeImage() {
 }
 $photoUrlInput.addEventListener('input', changeImage);
 
-$form.addEventListener('submit', addJournalToObj);
 function addJournalToObj() {
   event.preventDefault();
 
@@ -129,8 +135,6 @@ function addNewEntry(event) {
   $list.prepend(newDom);
   $noEntries.className = 'no-entries hidden';
 }
-
-$form.addEventListener('submit', addNewEntry);
 
 document.addEventListener('DOMContentLoaded', function (event) {
   switchView(data.view);
