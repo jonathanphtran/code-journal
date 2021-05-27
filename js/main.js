@@ -13,6 +13,8 @@ var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
 var $entryTitle = document.querySelector('h1');
+var $deleteButton = document.querySelector('.delete');
+var $btnContainer = document.querySelector('.btn-container');
 
 function submitNewEntry(event) {
   event.preventDefault();
@@ -58,6 +60,8 @@ $allPages.addEventListener('click', checkMatch);
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  $deleteButton.className = 'delete hidden';
+  $btnContainer.className = 'row btn-container flex-end';
 }
 
 function resetValues(event) {
@@ -214,4 +218,8 @@ $list.addEventListener('click', function (event) {
   $entryTitle.innerText = 'Edit Entry';
 
   changeImage();
+
+  $deleteButton.className = 'delete';
+  $btnContainer.className = 'row btn-container space-between';
+
 });
