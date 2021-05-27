@@ -18,7 +18,7 @@ var $btnContainer = document.querySelector('.btn-container');
 var $overlay = document.querySelector('.overlay');
 var $popUpRow = document.querySelector('.popUpRow');
 var $cancel = document.querySelector('.cancel');
-// var $confirm = document.querySelector('.confirm');
+var $confirm = document.querySelector('.confirm');
 
 function submitNewEntry(event) {
   event.preventDefault();
@@ -239,3 +239,22 @@ function closeModal(evnet) {
   $popUpRow.className = 'row flex-center popUpRow hidden';
 }
 $cancel.addEventListener('click', closeModal);
+
+function deleteEntry(event) {
+  var $allIds = document.querySelectorAll('i');
+  var $allLi = document.querySelectorAll('li');
+  var $dataView = event.target.getAttribute('data-view');
+  closeModal();
+  switchView($dataView);
+
+  for (var i = 0; i < $allIds.length; i++) {
+    var stringEntryID = data.editing.entryID.toString();
+    var stringID = $allIds[i].getAttribute('id');
+    if (stringEntryID === stringID) {
+      $allLi[i].remove();
+      // console.log($allLi[i]);
+    }
+  }
+}
+
+$confirm.addEventListener('click', deleteEntry);
