@@ -12,10 +12,14 @@ var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
+var $entryTitle = document.querySelector('h1');
 
 function submitNewEntry(event) {
+  event.preventDefault();
   navigateToView(event);
-  addJournalToObj();
+  if (data.editing === null) {
+    addJournalToObj();
+  }
   addNewEntry(event);
 }
 
@@ -30,6 +34,7 @@ function switchView(nameOfView) {
       $views[i].className = 'column-full column-half container hidden view';
     }
   }
+  $entryTitle.innerText = 'New Entry';
 }
 
 function checkMatch(event) {
@@ -46,6 +51,7 @@ function checkMatch(event) {
 
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  data.editing = null;
 }
 $allPages.addEventListener('click', checkMatch);
 
@@ -53,7 +59,15 @@ function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
 }
+
+function resetValues(event) {
+  $photoUrlInput.value = '';
+  $titleInput.value = '';
+  $notesInput.value = '';
+  changeImage();
+}
 $new.addEventListener('click', navigateToView);
+$new.addEventListener('click', resetValues);
 
 function changeImage() {
   event.preventDefault();
@@ -88,6 +102,7 @@ function addJournalToObj() {
   $photoUrlInput.value = '';
   $titleInput.value = '';
   $notesInput.value = '';
+
 }
 
 function generateDomTree(journalEntry) {
@@ -100,8 +115,17 @@ function generateDomTree(journalEntry) {
 
   var newInfoContainer = document.createElement('div');
   newInfoContainer.className = 'right';
+  var rowOne = document.createElement('div');
+  rowOne.className = 'row space-between';
+  var iconContainer = document.createElement('div');
+  iconContainer.className = 'icon-container';
+
   var newTitle = document.createElement('h2');
   newTitle.className = 'margin-bottom-1-rem';
+  var newEditIcon = document.createElement('i');
+  newEditIcon.setAttribute('id', journalEntry.entryID);
+  newEditIcon.className = 'fas fa-pen edit-icon';
+  newEditIcon.setAttribute('data-view', 'entry-form');
   var newDesc = document.createElement('p');
   newDesc.className = 'margin-bottom-1-rem entry-info';
 
@@ -109,7 +133,11 @@ function generateDomTree(journalEntry) {
   newTitle.appendChild(titleText);
   var descText = document.createTextNode(journalEntry.notes);
   newDesc.appendChild(descText);
-  newInfoContainer.appendChild(newTitle);
+
+  iconContainer.append(newEditIcon);
+  rowOne.append(newTitle);
+  rowOne.append(iconContainer);
+  newInfoContainer.appendChild(rowOne);
   newInfoContainer.appendChild(newDesc);
 
   newImage.setAttribute('src', journalEntry.image);
@@ -131,13 +159,32 @@ function appendDOM(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 
 function addNewEntry(event) {
-  var newDom = generateDomTree(data.entries[0]);
-  $list.prepend(newDom);
-  $noEntries.className = 'no-entries hidden';
+
+  if (data.editing === null) {
+    var newDom = generateDomTree(data.entries[0]);
+    $list.prepend(newDom);
+    $noEntries.className = 'no-entries hidden';
+  } else {
+    var $allIds = document.querySelectorAll('i');
+    var $allLi = document.querySelectorAll('li');
+    data.editing.title = $form.elements.title.value;
+    data.editing.image = $form.elements['photo-URL'].value;
+    data.editing.notes = $form.elements.notes.value;
+    var newEditDom = generateDomTree(data.editing);
+
+    for (var i = 0; i < $allIds.length; i++) {
+      var stringEntryID = data.editing.entryID.toString();
+      var stringID = $allIds[i].getAttribute('id');
+      if (stringEntryID === stringID) {
+        $allLi[i].replaceWith(newEditDom);
+      }
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
   switchView(data.view);
+  data.editing = null;
 });
 
 if (data.entries.length === 0) {
@@ -145,3 +192,26 @@ if (data.entries.length === 0) {
 } else if (data.entries.length > 0) {
   $noEntries.className = 'no-entries hidden';
 }
+
+$list.addEventListener('click', function (event) {
+  var $dataView = event.target.getAttribute('data-view');
+  var $oneList = event.target.getAttribute('id');
+
+  if (event.target.className === 'fas fa-pen edit-icon') {
+    switchView($dataView);
+  }
+
+  for (var j = 0; j < data.entries.length; j++) {
+    var stringID = data.entries[j].entryID.toString();
+    if ($oneList === stringID) {
+      data.editing = data.entries[j];
+    }
+  }
+
+  $titleInput.value = data.editing.title;
+  $photoUrlInput.value = data.editing.image;
+  $notesInput.value = data.editing.notes;
+  $entryTitle.innerText = 'Edit Entry';
+
+  changeImage();
+});
