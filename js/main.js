@@ -160,5 +160,12 @@ if (data.entries.length === 0) {
 
 $list.addEventListener('click', function (event) {
   var $dataView = event.target.getAttribute('data-view');
-  switchView($dataView);
+  if ($dataView === 'entry-form') {
+    $views[0].className = 'column-full column-half container view';
+    data.view = 'entry-form';
+  } else {
+    $views[1].className = 'column-full column-half container view';
+  }
+  // switchView($dataView);
+  // console.log(event.target);
 });
