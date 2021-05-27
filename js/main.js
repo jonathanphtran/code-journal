@@ -55,9 +55,15 @@ $allPages.addEventListener('click', checkMatch);
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
-  // data.editing = null;
+}
+
+function resetValues(event) {
+  $photoUrlInput.value = '';
+  $titleInput.value = '';
+  $notesInput.value = '';
 }
 $new.addEventListener('click', navigateToView);
+$new.addEventListener('click', resetValues);
 
 function changeImage() {
   event.preventDefault();
@@ -176,7 +182,9 @@ $list.addEventListener('click', function (event) {
   var $dataView = event.target.getAttribute('data-view');
   var $oneList = event.target.getAttribute('id');
 
-  switchView($dataView);
+  if (event.target.className === 'fas fa-pen edit-icon') {
+    switchView($dataView);
+  }
 
   for (var j = 0; j < data.entries.length; j++) {
     var stringID = data.entries[j].entryID.toString();
