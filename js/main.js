@@ -177,8 +177,10 @@ $list.addEventListener('click', function (event) {
     var stringID = data.entries[i].entryID.toString();
     if ($oneList === stringID) {
       // console.log('hiiiiiiiiiiiiiii');
+      data.editing = data.entries[i];
     }
   }
+  // console.log(data.editing);
 });
 
 // function checkIdMatch(event) {
