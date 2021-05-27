@@ -253,9 +253,9 @@ function deleteEntry(event) {
     if (stringEntryID === stringID) {
       $allLi[i].remove();
       data.entries.splice(i, 1);
-      // console.log($allLi[i]);
     }
   }
+  data.editing = null;
 }
 
 $confirm.addEventListener('click', deleteEntry);

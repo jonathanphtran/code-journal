@@ -129,13 +129,11 @@ i:hover {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.75);
   display: block;
-  z-index: 1;
 }
 
 .popUp {
   background-color: white;
   position: absolute;
-  z-index: 2;
   height: 10rem;
   padding: 1rem;
   border-radius: 0.25rem;
