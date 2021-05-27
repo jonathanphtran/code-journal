@@ -13,6 +13,12 @@ var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
 var $entryTitle = document.querySelector('h1');
+var $deleteButton = document.querySelector('.delete');
+var $btnContainer = document.querySelector('.btn-container');
+var $overlay = document.querySelector('.overlay');
+var $popUpRow = document.querySelector('.popUpRow');
+var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
 
 function submitNewEntry(event) {
   event.preventDefault();
@@ -58,6 +64,8 @@ $allPages.addEventListener('click', checkMatch);
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  $deleteButton.className = 'delete hidden';
+  $btnContainer.className = 'row btn-container flex-end';
 }
 
 function resetValues(event) {
@@ -214,4 +222,40 @@ $list.addEventListener('click', function (event) {
   $entryTitle.innerText = 'Edit Entry';
 
   changeImage();
+
+  $deleteButton.className = 'delete';
+  $btnContainer.className = 'row btn-container space-between';
+
 });
+
+function showModal(event) {
+  $overlay.className = 'overlay';
+  $popUpRow.className = 'row flex-center popUpRow';
+}
+$deleteButton.addEventListener('click', showModal);
+
+function closeModal(evnet) {
+  $overlay.className = 'overlay hidden';
+  $popUpRow.className = 'row flex-center popUpRow hidden';
+}
+$cancel.addEventListener('click', closeModal);
+
+function deleteEntry(event) {
+  var $allIds = document.querySelectorAll('i');
+  var $allLi = document.querySelectorAll('li');
+  var $dataView = event.target.getAttribute('data-view');
+  closeModal();
+  switchView($dataView);
+
+  for (var i = 0; i < $allIds.length; i++) {
+    var stringEntryID = data.editing.entryID.toString();
+    var stringID = $allIds[i].getAttribute('id');
+    if (stringEntryID === stringID) {
+      $allLi[i].remove();
+      data.entries.splice(i, 1);
+    }
+  }
+  data.editing = null;
+}
+
+$confirm.addEventListener('click', deleteEntry);

@@ -35,6 +35,10 @@
   width: 100%;
 }
 
+.flex-center {
+  justify-content: center;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -68,5 +72,10 @@
 
   .row-half {
     width: 50%;
+  }
+
+  .popUp {
+    width: 25rem;
+    max-width: 50%;
   }
 }

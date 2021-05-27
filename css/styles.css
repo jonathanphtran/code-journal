@@ -64,8 +64,12 @@ img {
   outline-color: #562b81;
 }
 
-.btn-container {
+.flex-end {
   justify-content: flex-end;
+}
+
+.btn-container {
+  align-items: center;
 }
 
 .btn {
@@ -110,6 +114,50 @@ i {
 i:hover {
   color: #562b81;
   cursor: pointer;
+}
+
+.delete {
+  color: red;
+  background: transparent;
+  text-decoration: underline;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: block;
+}
+
+.popUp {
+  background-color: white;
+  position: absolute;
+  height: 10rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  top: 28%;
+}
+
+.confirmation {
+  padding: 2rem 0;
+}
+
+.btn-format {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.cancel {
+  color: #292929;
+  background-color: #b6b6b6;
+}
+
+.confirm {
+  color: white;
+  background-color: #dc2626;
 }
 
 @media screen and (min-width: 768px) {
