@@ -89,7 +89,6 @@ function addJournalToObj() {
   $titleInput.value = '';
   $notesInput.value = '';
 
-  // console.log(entryInfo);
 }
 
 function generateDomTree(journalEntry) {
@@ -146,9 +145,13 @@ function appendDOM(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 
 function addNewEntry(event) {
-  var newDom = generateDomTree(data.entries[0]);
-  $list.prepend(newDom);
-  $noEntries.className = 'no-entries hidden';
+  if (data.entries[0].entryID !== data.editing.entryId) {
+    var newDom = generateDomTree(data.entries[0]);
+    $list.prepend(newDom);
+    $noEntries.className = 'no-entries hidden';
+  } else {
+    // console.log('hi');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -165,12 +168,17 @@ $list.addEventListener('click', function (event) {
   var $dataView = event.target.getAttribute('data-view');
   var $oneList = event.target.getAttribute('id');
 
-  switchView($dataView);
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === $dataView) {
+      $views[i].className = 'column-full column-half container view';
+      data.view = $dataView;
+    }
+  }
 
-  for (var i = 0; i < data.entries.length; i++) {
-    var stringID = data.entries[i].entryID.toString();
+  for (var j = 0; j < data.entries.length; j++) {
+    var stringID = data.entries[j].entryID.toString();
     if ($oneList === stringID) {
-      data.editing = data.entries[i];
+      data.editing = data.entries[j];
     }
   }
   // console.log(data.editing);
