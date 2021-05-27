@@ -252,6 +252,7 @@ function deleteEntry(event) {
     var stringID = $allIds[i].getAttribute('id');
     if (stringEntryID === stringID) {
       $allLi[i].remove();
+      data.entries.splice(i, 1);
       // console.log($allLi[i]);
     }
   }
