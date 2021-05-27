@@ -159,14 +159,14 @@ function appendDOM(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 
 function addNewEntry(event) {
-  var $allIds = document.querySelectorAll('i');
-  var $allLi = document.querySelectorAll('li');
 
   if (data.editing === null) {
     var newDom = generateDomTree(data.entries[0]);
     $list.prepend(newDom);
     $noEntries.className = 'no-entries hidden';
   } else {
+    var $allIds = document.querySelectorAll('i');
+    var $allLi = document.querySelectorAll('li');
     data.editing.title = $form.elements.title.value;
     data.editing.image = $form.elements['photo-URL'].value;
     data.editing.notes = $form.elements.notes.value;
