@@ -33,6 +33,7 @@ function switchView(nameOfView) {
       $views[i].className = 'column-full column-half container hidden view';
     }
   }
+  $entryTitle.innerText = 'New Entry';
 }
 
 function checkMatch(event) {
@@ -49,7 +50,6 @@ function checkMatch(event) {
 
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
-  $entryTitle.innerText = 'New Entry';
   data.editing = null;
 }
 $allPages.addEventListener('click', checkMatch);
@@ -57,7 +57,6 @@ $allPages.addEventListener('click', checkMatch);
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
-  $entryTitle.innerText = 'New Entry';
 }
 
 function resetValues(event) {
