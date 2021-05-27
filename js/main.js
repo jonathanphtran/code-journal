@@ -88,6 +88,8 @@ function addJournalToObj() {
   $photoUrlInput.value = '';
   $titleInput.value = '';
   $notesInput.value = '';
+
+  // console.log(entryInfo);
 }
 
 function generateDomTree(journalEntry) {
@@ -108,6 +110,7 @@ function generateDomTree(journalEntry) {
   var newTitle = document.createElement('h2');
   newTitle.className = 'margin-bottom-1-rem';
   var newEditIcon = document.createElement('i');
+  newEditIcon.setAttribute('id', journalEntry.entryID);
   newEditIcon.className = 'fas fa-pen edit-icon';
   newEditIcon.setAttribute('data-view', 'entry-form');
   var newDesc = document.createElement('p');
@@ -160,12 +163,24 @@ if (data.entries.length === 0) {
 
 $list.addEventListener('click', function (event) {
   var $dataView = event.target.getAttribute('data-view');
+  var $oneList = event.target.getAttribute('id');
+
+  // console.log(event.target);
   if ($dataView === 'entry-form') {
     $views[0].className = 'column-full column-half container view';
     data.view = 'entry-form';
   } else {
     $views[1].className = 'column-full column-half container view';
   }
-  // switchView($dataView);
-  // console.log(event.target);
+
+  for (var i = 0; i < data.entries.length; i++) {
+    var stringID = data.entries[i].entryID.toString();
+    if ($oneList === stringID) {
+      // console.log('hiiiiiiiiiiiiiii');
+    }
+  }
 });
+
+// function checkIdMatch(event) {
+
+// }
