@@ -100,6 +100,13 @@ h4 {
   top: 3rem;
 }
 
+i {
+  font-size: 1.3rem;
+  position: relative;
+  top: 0.2rem;
+  color: #562b81;
+}
+
 @media screen and (min-width: 768px) {
   .img-container {
     justify-content: flex-start;

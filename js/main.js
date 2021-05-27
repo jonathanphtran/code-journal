@@ -100,8 +100,16 @@ function generateDomTree(journalEntry) {
 
   var newInfoContainer = document.createElement('div');
   newInfoContainer.className = 'right';
+  var rowOne = document.createElement('div');
+  rowOne.className = 'row space-between';
+  var iconContainer = document.createElement('div');
+  iconContainer.className = 'icon-container';
+
   var newTitle = document.createElement('h2');
   newTitle.className = 'margin-bottom-1-rem';
+  var newEditIcon = document.createElement('i');
+  newEditIcon.className = 'fas fa-pen edit-icon';
+  newEditIcon.setAttribute('data-view', 'entry-form');
   var newDesc = document.createElement('p');
   newDesc.className = 'margin-bottom-1-rem entry-info';
 
@@ -109,7 +117,11 @@ function generateDomTree(journalEntry) {
   newTitle.appendChild(titleText);
   var descText = document.createTextNode(journalEntry.notes);
   newDesc.appendChild(descText);
-  newInfoContainer.appendChild(newTitle);
+
+  iconContainer.append(newEditIcon);
+  rowOne.append(newTitle);
+  rowOne.append(iconContainer);
+  newInfoContainer.appendChild(rowOne);
   newInfoContainer.appendChild(newDesc);
 
   newImage.setAttribute('src', journalEntry.image);
@@ -145,3 +157,8 @@ if (data.entries.length === 0) {
 } else if (data.entries.length > 0) {
   $noEntries.className = 'no-entries hidden';
 }
+
+$list.addEventListener('click', function (event) {
+  var $dataView = event.target.getAttribute('data-view');
+  switchView($dataView);
+});
