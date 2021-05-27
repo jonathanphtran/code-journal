@@ -15,6 +15,10 @@ var $noEntries = document.querySelector('.no-entries');
 var $entryTitle = document.querySelector('h1');
 var $deleteButton = document.querySelector('.delete');
 var $btnContainer = document.querySelector('.btn-container');
+var $overlay = document.querySelector('.overlay');
+var $popUpRow = document.querySelector('.popUpRow');
+var $cancel = document.querySelector('.cancel');
+// var $confirm = document.querySelector('.confirm');
 
 function submitNewEntry(event) {
   event.preventDefault();
@@ -223,3 +227,15 @@ $list.addEventListener('click', function (event) {
   $btnContainer.className = 'row btn-container space-between';
 
 });
+
+function showModal(event) {
+  $overlay.className = 'overlay';
+  $popUpRow.className = 'row flex-center popUpRow';
+}
+$deleteButton.addEventListener('click', showModal);
+
+function closeModal(evnet) {
+  $overlay.className = 'overlay hidden';
+  $popUpRow.className = 'row flex-center popUpRow hidden';
+}
+$cancel.addEventListener('click', closeModal);

@@ -21,8 +21,8 @@
       <span class="margin-1-rem column-30 page" data-view="entries">Entries</span>
     </div>
   </header>
-  <div class="overlay"></div>
-  <div class="row flex-center full-vh">
+  <div class="overlay hidden"></div>
+  <div class="row flex-center hidden popUpRow">
     <div class="popUp">
       <div class="column-full">
         <div class="row flex-center confirmation">
@@ -56,7 +56,7 @@
           <h4><label for="notes">Notes</label></h4>
           <textarea id="notes" name="notes" class="inputs" rows="7" required="required"></textarea>
           <div class="row btn-container flex-end">
-            <button class="delete hidden">Delete Entry</button>
+            <a class="delete hidden">Delete Entry</a>
             <button class="purple-bg btn save">SAVE</button>
           </div>
         </div>

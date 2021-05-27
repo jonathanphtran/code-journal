@@ -73,4 +73,9 @@
   .row-half {
     width: 50%;
   }
+
+  .popUp {
+    width: 25rem;
+    max-width: 50%;
+  }
 }

@@ -68,6 +68,10 @@ img {
   justify-content: flex-end;
 }
 
+.btn-container {
+  align-items: center;
+}
+
 .btn {
   color: white;
   border: none;
@@ -116,7 +120,6 @@ i:hover {
   color: red;
   background: transparent;
   text-decoration: underline;
-  border: none;
 }
 
 .overlay {
@@ -133,7 +136,6 @@ i:hover {
   background-color: white;
   position: absolute;
   z-index: 2;
-  width: 75%;
   height: 10rem;
   padding: 1rem;
   border-radius: 0.25rem;
