@@ -12,6 +12,7 @@ var $views = document.querySelectorAll('.view');
 var $list = document.querySelector('.list');
 var $new = document.querySelector('.new');
 var $noEntries = document.querySelector('.no-entries');
+var $entryTitle = document.querySelector('h1');
 
 function submitNewEntry(event) {
   navigateToView(event);
@@ -48,6 +49,7 @@ function checkMatch(event) {
 
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  $entryTitle.innerText = 'New Entry';
   data.editing = null;
 }
 $allPages.addEventListener('click', checkMatch);
@@ -55,6 +57,7 @@ $allPages.addEventListener('click', checkMatch);
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  $entryTitle.innerText = 'New Entry';
 }
 
 function resetValues(event) {
@@ -196,5 +199,5 @@ $list.addEventListener('click', function (event) {
   $titleInput.value = data.editing.title;
   $photoUrlInput.value = data.editing.image;
   $notesInput.value = data.editing.notes;
-
+  $entryTitle.innerText = 'Edit Entry';
 });
