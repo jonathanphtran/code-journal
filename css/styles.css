@@ -64,10 +64,6 @@ img {
   outline-color: #562b81;
 }
 
-.btn-container {
-  justify-content: flex-end;
-}
-
 .btn {
   color: white;
   border: none;
@@ -110,6 +106,13 @@ i {
 i:hover {
   color: #562b81;
   cursor: pointer;
+}
+
+.delete {
+  color: red;
+  text-decoration: underline;
+  border: none;
+  background-color: transparent;
 }
 
 @media screen and (min-width: 768px) {
