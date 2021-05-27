@@ -15,6 +15,7 @@ var $noEntries = document.querySelector('.no-entries');
 var $entryTitle = document.querySelector('h1');
 
 function submitNewEntry(event) {
+  event.preventDefault();
   navigateToView(event);
   if (data.editing === null) {
     addJournalToObj();
@@ -158,6 +159,8 @@ function appendDOM(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 
 function addNewEntry(event) {
+  var $allIds = document.querySelectorAll('i');
+  var $allLi = document.querySelectorAll('li');
 
   if (data.editing === null) {
     var newDom = generateDomTree(data.entries[0]);
@@ -167,6 +170,15 @@ function addNewEntry(event) {
     data.editing.title = $form.elements.title.value;
     data.editing.image = $form.elements['photo-URL'].value;
     data.editing.notes = $form.elements.notes.value;
+    var newEditDom = generateDomTree(data.editing);
+
+    for (var i = 0; i < $allIds.length; i++) {
+      var stringEntryID = data.editing.entryID.toString();
+      var stringID = $allIds[i].getAttribute('id');
+      if (stringEntryID === stringID) {
+        $allLi[i].replaceWith(newEditDom);
+      }
+    }
   }
 }
 
