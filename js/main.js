@@ -15,7 +15,9 @@ var $noEntries = document.querySelector('.no-entries');
 
 function submitNewEntry(event) {
   navigateToView(event);
-  addJournalToObj();
+  if (data.editing === null) {
+    addJournalToObj();
+  }
   addNewEntry(event);
 }
 
@@ -46,12 +48,14 @@ function checkMatch(event) {
 
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  data.editing = null;
 }
 $allPages.addEventListener('click', checkMatch);
 
 function navigateToView(event) {
   var $dataView = event.target.getAttribute('data-view');
   switchView($dataView);
+  // data.editing = null;
 }
 $new.addEventListener('click', navigateToView);
 
@@ -145,17 +149,21 @@ function appendDOM(event) {
 window.addEventListener('DOMContentLoaded', appendDOM);
 
 function addNewEntry(event) {
-  if (data.entries[0].entryID !== data.editing.entryId) {
+
+  if (data.editing === null) {
     var newDom = generateDomTree(data.entries[0]);
     $list.prepend(newDom);
     $noEntries.className = 'no-entries hidden';
   } else {
-    // console.log('hi');
+    data.editing.title = $form.elements.title.value;
+    data.editing.image = $form.elements['photo-URL'].value;
+    data.editing.notes = $form.elements.notes.value;
   }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
   switchView(data.view);
+  data.editing = null;
 });
 
 if (data.entries.length === 0) {
@@ -168,12 +176,7 @@ $list.addEventListener('click', function (event) {
   var $dataView = event.target.getAttribute('data-view');
   var $oneList = event.target.getAttribute('id');
 
-  for (var i = 0; i < $views.length; i++) {
-    if ($views[i].getAttribute('data-view') === $dataView) {
-      $views[i].className = 'column-full column-half container view';
-      data.view = $dataView;
-    }
-  }
+  switchView($dataView);
 
   for (var j = 0; j < data.entries.length; j++) {
     var stringID = data.entries[j].entryID.toString();
@@ -181,13 +184,9 @@ $list.addEventListener('click', function (event) {
       data.editing = data.entries[j];
     }
   }
-  // console.log(data.editing);
 
   $titleInput.value = data.editing.title;
   $photoUrlInput.value = data.editing.image;
   $notesInput.value = data.editing.notes;
+
 });
-
-// function checkIdMatch(event) {
-
-// }
