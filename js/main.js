@@ -63,6 +63,7 @@ function resetValues(event) {
   $photoUrlInput.value = '';
   $titleInput.value = '';
   $notesInput.value = '';
+  changeImage();
 }
 $new.addEventListener('click', navigateToView);
 $new.addEventListener('click', resetValues);
@@ -199,4 +200,6 @@ $list.addEventListener('click', function (event) {
   $photoUrlInput.value = data.editing.image;
   $notesInput.value = data.editing.notes;
   $entryTitle.innerText = 'Edit Entry';
+
+  changeImage();
 });
