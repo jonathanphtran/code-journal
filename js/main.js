@@ -47,6 +47,8 @@ function checkMatch(event) {
   var $match = event.target.matches('.page');
   if (!$match) return;
 
+  // this is used to change the style of the tab labels, but I never did the CSS, 
+  // so it doesn't really do anyting
   for (var i = 0; i < $pages.length; i++) {
     if ($pages[i] === event.target) {
       $pages[i].className = 'margin-1-rem column-30 page active';
